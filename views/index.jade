@@ -1,0 +1,78 @@
+doctype html
+html
+  head
+    title insertTitle
+    meta(charset='utf-8')
+    link(href="/stylesheets/bootstrap.css",rel="stylesheet")
+    link(href="/stylesheets/index.css",rel="stylesheet")
+    script(src="/javascripts/jquery-2.1.0.js",type="text/javascript")
+    script(src="/javascripts/bootstrap.js",type="text/javascript")
+    script(src="/javascripts/index.js", type="text/javascript")
+   body
+     div(id='app')
+       div(id="head", class="col-lg-12 col-md-12 col-ls-12 col-xs-12")
+         div(class="col-lg-4 col-md-6 col-ls-6")
+          img(class="", src="/images/logo_header.png" style="height:39px;width:150px;margin-top:15px")
+         h1(class="col-lg-4 col-md-6 col-ls-6") 学生信息管理系统
+       div(id="content")
+         div(id="content-nav")
+           div(class="col-lg-3 col-md-2 hidden-ls hidden-xs")
+           div(class="col-lg-6 col-md-8")
+               ul(class="nav navbar-nav")
+                 li 查询内容：
+                  input(type="text", id="search")
+                 li
+                  button(class="btn btn-primary", onclick="selectStudent('sid')") 查询id
+                 li
+                   button(class="btn btn-primary", onclick="selectStudent('name')") 查询姓名
+                 li
+                  button(class="btn btn-primary", id="addBtn", data-toggle="modal" data-target="#stuModel") 新增
+           div(class="col-lg-3 col-md-2 hidden-ls hidden-xs")
+         table(class="table table-bordered table-striped")
+           thead
+            tr
+              td 学号
+              td 姓名
+              td 年龄
+              td 班级
+              td 操作
+           tbody
+             - if(students && students.length > 0){
+               - for(var i = 0;i < students.length;i++){
+                 tr
+                   td #{students[i].sid}
+                   td #{students[i].name}
+                   td #{students[i].age}
+                   td #{students[i]['class']}
+                   td
+                       button(class="btn btn-info btn-xs", id="updBtn", data-toggle="modal" data-target="#stuModel") 修改
+                       button(class="btn btn-danger btn-xs", onclick="del(#{students[i].sid})") 删除
+               - }
+             -} else {
+                 tr
+                   td(colspan=5) 暂无记录
+             -}
+    div(class="modal fade bs-example-modal-sm",id="stuModel",tabindex="-1",role="dialog",aria-labelledby="myLargeModalLabel")
+        div(class="modal-dialog modal-sm",role="document")
+            div(class="modal-content")
+                form(id="myForm",action="",method="get")
+                    div(class="modal-header")
+                        button(class="close",data-dismiss="modal",aria-label="Close")
+                          span(aria-hidden="true") &times;
+                        h4(class="modal-title") 学生信息管理
+                    div(class="modal-body")
+                        div(id="sid_div")
+                            label 学号：
+                            input(type="text", id="sid", name="sid")
+                        div(id="name_div")
+                            label 姓名：
+                            input(type="text", id="name", name="name")
+                        div(id="age_div")
+                            label 年龄：
+                            input(type="number", id="age", name="age")
+                        div(id="class_div")
+                            label 班级：
+                            input(type="text", id="class", name="class")
+                    div(class="modal-footer text-center")
+                        input(type="submit",id="submit",class="btn btn-primary" value="提交")
+                        button(id="cancel",class="btn btn-default",data-dismiss="modal") 取消

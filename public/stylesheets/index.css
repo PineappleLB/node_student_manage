@@ -1,0 +1,23 @@
+
+#app #head{
+    text-align: center;
+    background: black;
+    color: white;
+    line-height: 39px;
+}
+#app #content table thead tr td{
+    text-align: center;
+}
+#app #content table tbody tr td{
+    text-align: center;
+}
+#app #content #content-nav{
+    height: 60px;
+}
+#app #content #content-nav ul{
+    margin: 10px auto;
+}
+#app #content #content-nav ul li{
+    margin: 0 10px;
+
+}
